@@ -1,59 +1,11 @@
 import React, { useState } from "react";
+import {questions} from "./Data/Data"
 function App() {
   
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-
-  const questions = [
-    {
-      text: "What is the capital of America?",
-      options: [
-        { id: 0, text: "New York City", isCorrect: false },
-        { id: 1, text: "Boston", isCorrect: false },
-        { id: 2, text: "Santa Fe", isCorrect: false },
-        { id: 3, text: "Washington DC", isCorrect: true },
-      ],
-    },
-    {
-      text: "What year was the Constitution of America written?",
-      options: [
-        { id: 0, text: "1787", isCorrect: true },
-        { id: 1, text: "1776", isCorrect: false },
-        { id: 2, text: "1774", isCorrect: false },
-        { id: 3, text: "1826", isCorrect: false },
-      ],
-    },
-    {
-      text: "Who was the second president of the US?",
-      options: [
-        { id: 0, text: "John Adams", isCorrect: true },
-        { id: 1, text: "Paul Revere", isCorrect: false },
-        { id: 2, text: "Thomas Jefferson", isCorrect: false },
-        { id: 3, text: "Benjamin Franklin", isCorrect: false },
-      ],
-    },
-    {
-      text: "What is the largest state in the US?",
-      options: [
-        { id: 0, text: "California", isCorrect: false },
-        { id: 1, text: "Alaska", isCorrect: true },
-        { id: 2, text: "Texas", isCorrect: false },
-        { id: 3, text: "Montana", isCorrect: false },
-      ],
-    },
-    {
-      text: "Which of the following countries DO NOT border the US?",
-      options: [
-        { id: 0, text: "Canada", isCorrect: false },
-        { id: 1, text: "Russia", isCorrect: true },
-        { id: 2, text: "Cuba", isCorrect: true },
-        { id: 3, text: "Mexico", isCorrect: false },
-      ],
-    },
-  ];
-
-
+  
   const optionClicked = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
@@ -72,30 +24,30 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>USA Quiz 🇺🇸</h1>
-      <h2>Score: {score}</h2>
+    <div className="flex flex-col justify-center items-center p-10 ">
+      <h1 className="text-2xl font-bold">USA Quiz 🇺🇸</h1>
+      <h2 className="text-xl font-md font-semibold">Score: {score}</h2>
 
       {showResults ? (
-        <div className="final-results">
+        <div className="bg-gray-500 shadow-xl p-10 text-white m-2 text-md rounded-xl flex flex-col gap-3 text-center font-semibold">
           <h1>Final Results</h1>
-          <h2>
+          <h2 className="text-center text-yellow-400 font-bold">
             {score} out of {questions.length} correct - (
             {(score / questions.length) * 100}%)
           </h2>
-          <button onClick={() => restartGame()}>Restart game</button>
+          <button className="text-sm bg-gray-400 text-black font-semibold hover:bg-yellow-500 px-1 py-1 border-2 rounded-xl " onClick={() => restartGame()}>Restart game</button>
         </div>
       ) : (
-        <div className="question-card">
-          <h2>
+        <div className="text-sm font-semibold bg-gray-400 rounded-xl p-5 m-2 mx-5 shadow-md text-white w-1/3">
+          <h2 className="text-[17px] text-green-950 font-bold text-center m-3">
             Question: {currentQuestion + 1} out of {questions.length}
           </h2>
-          <h3 className="question-text">{questions[currentQuestion].text}</h3>
+          <h3 className="text-center font-serif text-[16px] mx-5 my-5">{questions[currentQuestion].text}</h3>
 
-          <ul>
+          <ul className="flex flex-col justify-center items-center gap-2 font-serif">
             {questions[currentQuestion].options.map((option) => {
               return (
-                <li
+                <li className="bg-gray-800 w-1/2 hover:bg-yellow-500 px-3 py-2 border-2  rounded-xl "
                   key={option.id}
                   onClick={() => optionClicked(option.isCorrect)}
                 >
